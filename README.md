@@ -126,7 +126,7 @@ The spatial agreement should be interpreted cautiously because of differences in
 
 **Sentinel-1 and UNOSAT Comparison**
 
-[View UNOSAT Comparison Map (PDF)](maps/FloodSense_UNOSAT_Comparison_Map.png)
+[View UNOSAT Comparison Map](maps/FloodSense_UNOSAT_Comparison_Map.png)
 
 **XGBoost Classified Map**
 
