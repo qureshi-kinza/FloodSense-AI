@@ -1,150 +1,182 @@
 # FloodSense-AI
+### Satellite-Based Flood Mapping and Machine Learning Analysis Using Sentinel-1, XGBoost, and SHAP
 
-### An Explainable Geospatial Machine Learning Framework for Satellite-Based Flood Mapping
+FloodSense-AI is a geospatial and machine learning project developed to identify potential flood-affected areas using Sentinel-1 Synthetic Aperture Radar (SAR) imagery, terrain information, vegetation indicators, and an XGBoost classification model.
 
-**Study Area:** Nowshera District, Khyber Pakhtunkhwa, Pakistan  
-**Flood Event:** August 2025  
-**Core Technologies:** Google Earth Engine, Sentinel-1 SAR, Python, XGBoost, SHAP
+The project combines satellite-based flood detection, machine learning, spatial validation against a UNOSAT reference dataset, and explainable AI to produce flood-related maps and statistical outputs.
+
+The study focuses on flood conditions in **Khyber Pakhtunkhwa, Pakistan**, with particular attention to the Nowshera area.
 
 ---
 
-## 1. Project Overview
+## Project Objectives
 
-FloodSense-AI is an explainable geospatial machine learning project designed to investigate flood-related surface changes using satellite remote sensing and machine learning.
+The main objectives are:
 
-The project focuses on the August 2025 flood event in Nowshera District, Pakistan. It combines multi-temporal Sentinel-1 Synthetic Aperture Radar (SAR) observations, terrain characteristics, vegetation information, and an XGBoost classification model.
+1. Identify potential flood-affected areas using multi-temporal Sentinel-1 SAR imagery.
+2. Examine changes in radar backscatter between pre-flood and post-flood observations.
+3. Incorporate terrain and vegetation information into flood susceptibility modelling.
+4. Develop an XGBoost classification model to identify potential flood-affected pixels.
+5. Compare Sentinel-1-derived results with UNOSAT reference information.
+6. Apply SHAP explainability to understand the contribution of individual predictors to model predictions.
 
-SHAP (SHapley Additive exPlanations) is used to interpret the contribution of individual predictor variables to model predictions.
+---
 
-The workflow integrates remote sensing, GIS, spatial validation, machine learning, and explainable AI in a reproducible analytical framework.
+## Methodology
 
-## 2. Project Objectives
+The workflow consists of the following stages:
 
-- Identify potential flood-related surface changes using multi-temporal Sentinel-1 SAR imagery.
-- Compare ascending and descending satellite observations.
-- Evaluate spatial agreement between Sentinel-1-derived candidate areas and a UNOSAT satellite reference.
-- Develop an XGBoost classification model using geospatial predictors.
-- Apply spatially grouped training and testing to reduce spatial data leakage.
-- Interpret model behaviour using SHAP explainability.
+### 1. Study Area and Data Preparation
 
-## 3. Study Area
+The study area was defined using administrative boundaries for Khyber Pakhtunkhwa, Pakistan.
 
-The study focuses on Nowshera District in Khyber Pakhtunkhwa, Pakistan, an area affected by seasonal flooding and river-related flood hazards.
+The analysis integrates satellite imagery, terrain information, and reference flood data.
 
-![Study Area Map](maps/FloodSense_Study_Area_Map.png)
+### 2. Sentinel-1 SAR Processing
 
-## 4. Methodology
+Sentinel-1 GRD imagery was used to examine changes in radar backscatter.
 
-### 4.1 Sentinel-1 SAR Change Detection
+The workflow includes:
 
-Sentinel-1 Ground Range Detected (GRD) imagery was processed using Google Earth Engine.
+- Selection of pre-flood and post-flood Sentinel-1 observations.
+- Separate examination of ascending and descending orbital observations.
+- Extraction of VV polarization backscatter.
+- Calculation of backscatter differences.
 
-Pre-event and event-period VV backscatter observations were compared using:
+The VV backscatter change was calculated as:
 
-`VV Change = Post-event VV − Pre-event VV`
+`VV Change = Post-flood VV − Pre-flood VV`
 
-Negative backscatter changes were investigated as potential indicators of flood-related surface changes.
+A threshold-based approach was used to identify potential flood-related changes in radar backscatter.
 
-The main orbit comparisons included:
+### 3. Environmental and Terrain Predictors
 
-- Ascending orbit 173: 8 August and 20 August 2025.
-- Descending orbit 5: 9 August and 21 August 2025.
+The machine learning model uses five predictor variables:
 
-An additional descending-orbit observation was used as supplementary analysis.
+- Elevation
+- Slope
+- NDVI
+- Ascending-orbit VV change
+- Descending-orbit VV change
 
-### 4.2 Multi-Orbit Agreement
+Elevation and slope provide information about terrain conditions, NDVI represents vegetation conditions, and Sentinel-1 backscatter differences capture radar changes between observation periods.
 
-Ascending and descending observations were compared to identify areas where both satellite viewing geometries indicated potential flood-related changes.
+### 4. XGBoost Classification
 
-The resulting categories represent agreement between radar observations, not independently confirmed flood observations.
+An XGBoost classifier was trained to distinguish between the two reference classes:
 
-### 4.3 UNOSAT Reference Comparison
+- Class 0: Non-flood
+- Class 1: Flood
 
-The Sentinel-1 candidate extent was compared with a UNOSAT Sentinel-2 flood reference dated 20 August 2025.
+A spatial group-based training and testing strategy was used to reduce the risk of nearby spatial observations appearing in both datasets.
 
-The reference metadata indicated that the flood extent had not yet been field validated. Therefore, it is treated as a satellite-derived reference dataset rather than definitive ground truth.
+The model produces classified flood-related predictions and probability estimates.
 
-### 4.4 Geospatial Predictors
+### 5. Model Evaluation
 
-Five predictors were used in the XGBoost classification workflow:
+The model was evaluated using:
 
-| Predictor | Description |
-|---|---|
-| Elevation | Terrain elevation |
-| Slope | Terrain slope in degrees |
-| NDVI | Normalized Difference Vegetation Index |
-| Ascending VV Change | Sentinel-1 ascending-orbit backscatter change |
-| Descending VV Change | Sentinel-1 descending-orbit backscatter change |
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- ROC-AUC
+- Confusion matrix
 
-### 4.5 XGBoost Classification
+The evaluation measures agreement with the UNOSAT-derived reference labels. These results should not be interpreted as independently verified flood-detection accuracy because the reference dataset has not been field validated.
 
-An XGBoost classifier was developed using the geospatial predictor variables and reference-derived class labels.
+### 6. UNOSAT Comparison
 
-A spatial group-based train/test split was applied to reduce the risk of spatial leakage between training and testing samples.
+The Sentinel-1 candidate flood map was compared spatially with the UNOSAT reference dataset.
 
-The model's output represents its prediction of the reference-derived class. Its probability values should not be interpreted as independently calibrated probabilities of actual flooding.
+The comparison examines:
 
-### 4.6 SHAP Explainability
+- Sentinel-1 candidate flood area
+- UNOSAT reference flood area
+- Spatial overlap
+- Intersection over Union (IoU)
 
-SHAP was applied to investigate how the five predictor variables contributed to the model's predictions.
+The comparison provides an indication of spatial agreement and disagreement between the two mapped datasets.
 
-This provides insight into model behaviour and feature importance rather than establishing causal relationships between environmental variables and flooding.
+### 7. SHAP Explainability
 
-## 5. Key Results
+SHAP (SHapley Additive exPlanations) was applied to interpret the XGBoost model.
 
-### XGBoost Model Evaluation
+It helps identify:
+
+- Relative predictor importance
+- The contribution of individual predictors
+- How predictor values influence model predictions
+
+SHAP explains the model's behaviour; it does not establish causal relationships between environmental variables and flooding.
+
+---
+
+## Model Performance
+
+The following results are reported for the spatial test sample:
 
 | Evaluation Metric | Result |
 |---|---:|
 | Accuracy | 0.908 |
-| Precision (Class 1) | 0.90 |
-| Recall (Class 1) | 0.97 |
-| F1-score (Class 1) | 0.94 |
+| Precision (Flood Class) | 0.90 |
+| Recall (Flood Class) | 0.97 |
+| F1-score (Flood Class) | 0.94 |
 | ROC-AUC | 0.928 |
 
-**Interpretation:** These metrics represent agreement between the model predictions and UNOSAT-derived reference labels on the spatial test sample. They should not be interpreted as independently verified flood-detection accuracy.
+**Interpretation:** The model demonstrates strong agreement with the reference labels on the spatial test sample. However, independent field validation would be required to establish real-world flood-detection accuracy.
 
-### Sentinel-1 and UNOSAT Comparison
+---
 
-The spatial comparison evaluates the relationship between the Sentinel-1 candidate extent and the UNOSAT reference extent.
+## Project Outputs
 
-The comparison statistics, including area measurements and Intersection over Union (IoU), are provided in the results folder.
-
-The spatial agreement should be interpreted cautiously because of differences in satellite sensors, acquisition dates, observation geometry, and mapping methods.
-
-## 6. Project Outputs
+The repository contains the final PNG map visualizations, statistical CSV files, and the complete analytical notebook.
 
 ### Maps and Visualizations
 
 #### Study Area Map
+
 ![Study Area Map](maps/FloodSense_Study_Area_Map.png)
 
 #### Sentinel-1 Candidate Flood Map
-![Sentinel-1 Candidate Map](maps/FloodSense_Sentinel1_Candidate_Map.png)
+
+![Sentinel-1 Candidate Flood Map](maps/FloodSense_Sentinel1_Candidate_Map.png)
 
 #### UNOSAT Comparison Map
+
 ![UNOSAT Comparison Map](maps/FloodSense_UNOSAT_Comparison_Map.png)
 
 #### XGBoost Classified Map
+
 ![XGBoost Classified Map](maps/FloodSense_XGBoost_Classified_Map.png)
 
 #### XGBoost Probability Map
+
 ![XGBoost Probability Map](maps/FloodSense_XGBoost_Probability_Map.png)
 
 #### SHAP Explainability
+
 ![SHAP Explainability](maps/FloodSense_SHAP_Explainability.png)
 
-### Statistical Outputs
+### Statistical Results
 
-The results folder contains:
+The following CSV files are available in the `results/` directory:
 
-- XGBoost classification report.
-- Confusion matrix.
-- Sentinel-1 area statistics.
-- UNOSAT comparison statistics.
-- SHAP feature importance values.
+- [Classification Report](results/FloodSense_Classification_Report.csv)
+- [Confusion Matrix](results/FloodSense_Confusion_Matrix.csv)
+- [UNOSAT Comparison Statistics](results/FloodSense_UNOSAT_Comparison_Statistics.csv)
+- [Sentinel-1 Area Statistics](results/FloodSense_Sentinel1_Area_Statistics.csv)
+- [SHAP Feature Importance](results/FloodSense_SHAP_Feature_Importance.csv)
 
-## 7. Repository Structure
+### Analytical Notebook
+
+The complete analytical workflow is available here:
+
+[Open FloodSense AI Jupyter Notebook](notebooks/FloodSense_AI.ipynb)
+
+---
+
+## Repository Structure
 
 ```text
 FloodSense-AI/
@@ -171,57 +203,74 @@ FloodSense-AI/
 └── requirements.txt
 ```
 
-## 8. Technologies and Tools
+---
 
-- Python
-- Google Colab
+## Technologies and Tools
+
 - Google Earth Engine
+- Google Colab
+- Python
 - Sentinel-1 SAR
-- GeoPandas
-- Rasterio
-- NumPy
-- Pandas
-- Scikit-learn
 - XGBoost
 - SHAP
+- Rasterio
+- GeoPandas
+- NumPy
+- Pandas
 - Matplotlib
-- Geemap
-- PyProj
-
-## 9. Reproducibility
-
-The main analytical workflow is provided in the Jupyter notebook:
-
-`notebooks/FloodSense_AI.ipynb`
-
-To reproduce the workflow:
-
-1. Open the notebook in Google Colab.
-2. Install the dependencies listed in `requirements.txt`.
-3. Authenticate your Google account and Google Earth Engine access.
-4. Configure your own Google Earth Engine project ID.
-5. Provide the required UNOSAT reference data in your Google Drive project folder.
-6. Run the notebook cells sequentially.
-
-**Data Availability:** The repository includes the complete analytical notebook, final map visualizations, and statistical results. Large satellite input datasets, intermediate processing rasters, and the XGBoost probability GeoTIFF are not included due to storage considerations. These datasets and outputs can be obtained or generated separately by following the instructions in the notebook.
-
-## 10. Limitations
-
-- The UNOSAT reference dataset used in this analysis was not yet field validated.
-- Sentinel-1 backscatter changes are not exclusively caused by flooding; vegetation, soil moisture, surface roughness, and acquisition geometry can also influence radar responses.
-- Satellite-derived candidate flood areas are not equivalent to confirmed flood boundaries.
-- Model performance reflects agreement with the selected reference labels and sampling strategy.
-- Balanced training samples may affect the interpretation and calibration of predicted probabilities.
-- Additional field observations and independent reference datasets are required for stronger validation.
-
-## 11. Research Significance
-
-FloodSense-AI demonstrates an integrated geospatial workflow combining multi-orbit SAR change detection, terrain-based predictors, spatially grouped machine learning validation, and explainable AI.
-
-Its emphasis is on transparent analytical methods and interpretable model behaviour for satellite-based flood analysis, rather than claiming a fully validated operational flood-warning system.
+- Scikit-learn
+- Earth Engine Python API
 
 ---
 
-**Project Repository:** [FloodSense-AI on GitHub](https://github.com/qureshi-kinza/FloodSense-AI)
+## Reproducibility
+
+The complete analytical workflow is provided in the Jupyter Notebook.
+
+To reproduce the analysis:
+
+1. Open the notebook in Google Colab.
+2. Install the required Python dependencies using `requirements.txt`.
+3. Authenticate your Google Earth Engine account.
+4. Configure your own Earth Engine project ID.
+5. Provide the required UNOSAT reference dataset.
+6. Configure the Google Drive directory for project data.
+7. Run the notebook cells sequentially.
+
+Some input datasets and intermediate processing files must be obtained or generated separately before running the complete workflow.
+
+---
+
+## Data Availability
+
+This repository includes:
+
+- Analytical Jupyter Notebook
+- Final PNG map visualizations
+- Statistical CSV outputs
+- Model evaluation results
+- SHAP feature importance results
+
+Large satellite input datasets, intermediate processing files, and the probability GeoTIFF are not included in the GitHub repository.
+
+---
+
+## Limitations
+
+- The model relies on reference labels derived from the UNOSAT dataset.
+- The reference dataset has not been independently field validated.
+- Sentinel-1 backscatter changes can be influenced by vegetation, soil moisture, surface roughness, and other environmental conditions.
+- Flood detection based on radar backscatter thresholds may produce false positives and false negatives.
+- Spatial agreement with a reference map does not necessarily establish the actual extent of flooding.
+
+---
+
+## Research Significance
+
+FloodSense-AI demonstrates an integrated geospatial workflow combining satellite remote sensing, terrain analysis, machine learning, spatial comparison, and explainable artificial intelligence.
+
+The project highlights how Earth observation and machine learning can support flood-related spatial analysis and provide interpretable information for environmental monitoring and disaster-risk assessment.
 
 **Author:** Qureshi Kinza
+
+**GitHub Repository:** https://github.com/qureshi-kinza/FloodSense-AI
