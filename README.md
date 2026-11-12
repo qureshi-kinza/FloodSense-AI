@@ -116,21 +116,23 @@ The spatial agreement should be interpreted cautiously because of differences in
 
 ### Maps and Visualizations
 
-**Study Area**
+#### Study Area Map
+![Study Area Map](maps/FloodSense_Study_Area_Map.png)
 
-![Study Area](maps/FloodSense_Study_Area_Map.png)
+#### Sentinel-1 Candidate Flood Map
+![Sentinel-1 Candidate Map](maps/FloodSense_Sentinel1_Candidate_Map.png)
 
-**Sentinel-1 Candidate Flood Extent**
+#### UNOSAT Comparison Map
+![UNOSAT Comparison Map](maps/FloodSense_UNOSAT_Comparison_Map.png)
 
-### Maps and Visualizations
+#### XGBoost Classified Map
+![XGBoost Classified Map](maps/FloodSense_XGBoost_Classified_Map.png)
 
-The `maps/` folder contains the final project visualizations in PNG format.
+#### XGBoost Probability Map
+![XGBoost Probability Map](maps/FloodSense_XGBoost_Probability_Map.png)
 
-- [Study Area Map](maps/FloodSense_Study_Area_Map.png)
-- [Sentinel-1 Candidate Map](maps/FloodSense_Sentinel1_Candidate_Map.png)
-- [XGBoost Classified Map](maps/FloodSense_XGBoost_Classified_Map.png)
-- [XGBoost Probability Map](maps/FloodSense_XGBoost_Probability_Map.png)
-- [SHAP Explainability Visualization](maps/FloodSense_SHAP_Explainability.png)
+#### SHAP Explainability
+![SHAP Explainability](maps/FloodSense_SHAP_Explainability.png)
 
 ### Statistical Outputs
 
@@ -152,16 +154,11 @@ FloodSense-AI/
 │
 ├── maps/
 │   ├── FloodSense_Study_Area_Map.png
-│   ├── FloodSense_Study_Area_Map.pdf
 │   ├── FloodSense_Sentinel1_Candidate_Map.png
-│   ├── FloodSense_Sentinel1_Candidate_Map.pdf
-│   ├── FloodSense_UNOSAT_Comparison_Map.pdf
+│   ├── FloodSense_UNOSAT_Comparison_Map.png
 │   ├── FloodSense_XGBoost_Classified_Map.png
-│   ├── FloodSense_XGBoost_Classified_Map.pdf
 │   ├── FloodSense_XGBoost_Probability_Map.png
-│   ├── FloodSense_XGBoost_Probability_Map.pdf
-│   ├── FloodSense_SHAP_Explainability.png
-│   └── FloodSense_SHAP_Explainability.pdf
+│   └── FloodSense_SHAP_Explainability.png
 │
 ├── results/
 │   ├── FloodSense_Classification_Report.csv
