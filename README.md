@@ -122,25 +122,15 @@ The spatial agreement should be interpreted cautiously because of differences in
 
 **Sentinel-1 Candidate Flood Extent**
 
-![Sentinel-1 Candidate Map](maps/FloodSense_Sentinel1_Candidate_Map.png)
+### Maps and Visualizations
 
-**Sentinel-1 and UNOSAT Comparison**
+The `maps/` folder contains the final project visualizations in PNG format.
 
-![UNOSAT Comparison Map](maps/FloodSense_UNOSAT_Comparison_Map.png)
-
-**XGBoost Classified Map**
-
-![XGBoost Classified Map](maps/FloodSense_XGBoost_Classified_Map.png)
-
-**XGBoost Prediction Probability Map**
-
-![XGBoost Probability Map](maps/FloodSense_XGBoost_Probability_Map.png)
-
-**SHAP Explainability**
-
-![SHAP Explainability](maps/FloodSense_SHAP_Explainability.png)
-
-PDF versions of the maps are also included in the maps folder.
+- [Study Area Map](maps/FloodSense_Study_Area_Map.png)
+- [Sentinel-1 Candidate Map](maps/FloodSense_Sentinel1_Candidate_Map.png)
+- [XGBoost Classified Map](maps/FloodSense_XGBoost_Classified_Map.png)
+- [XGBoost Probability Map](maps/FloodSense_XGBoost_Probability_Map.png)
+- [SHAP Explainability Visualization](maps/FloodSense_SHAP_Explainability.png)
 
 ### Statistical Outputs
 
