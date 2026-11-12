@@ -167,6 +167,7 @@ The following CSV files are available in the `results/` directory:
 - [UNOSAT Comparison Statistics](results/FloodSense_UNOSAT_Comparison_Statistics.csv)
 - [Sentinel-1 Area Statistics](results/FloodSense_Sentinel1_Area_Statistics.csv)
 - [SHAP Feature Importance](results/FloodSense_SHAP_Feature_Importance.csv)
+- [XGBoost_Model_Metrics](results/FloodSense_XGBoost_Model_Metrics.csv)
 
 ### Analytical Notebook
 
