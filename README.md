@@ -203,7 +203,7 @@ To reproduce the workflow:
 5. Provide the required UNOSAT reference data in your Google Drive project folder.
 6. Run the notebook cells sequentially.
 
-Large satellite datasets, intermediate rasters, and the XGBoost probability GeoTIFF are not included in this GitHub repository. Users must provide the required input data and generate these outputs by running the workflow.
+**Data Availability:** The repository includes the complete analytical notebook, final map visualizations, and statistical results. Large satellite input datasets, intermediate processing rasters, and the XGBoost probability GeoTIFF are not included due to storage considerations. These datasets and outputs can be obtained or generated separately by following the instructions in the notebook.
 
 ## 10. Limitations
 
