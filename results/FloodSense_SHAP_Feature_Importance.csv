@@ -1,0 +1,6 @@
+Feature,Mean_Absolute_SHAP
+elevation,3.4048095
+ndvi,0.5330136
+ascending_change,0.40032053
+descending_change,0.27945927
+slope,0.20222439
