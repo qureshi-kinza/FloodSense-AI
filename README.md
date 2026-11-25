@@ -1,5 +1,6 @@
 # FloodSense-AI
 ### Satellite-Based Flood Mapping and Machine Learning Analysis Using Sentinel-1, XGBoost, and SHAP
+https://doi.org/10.5281/zenodo.24167626
 
 FloodSense-AI is a geospatial and machine learning project developed to identify potential flood-affected areas using Sentinel-1 Synthetic Aperture Radar (SAR) imagery, terrain information, vegetation indicators, and an XGBoost classification model.
 
