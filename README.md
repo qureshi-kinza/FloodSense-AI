@@ -1,5 +1,20 @@
 # FloodSense-AI
 ### Satellite-Based Flood Mapping and Machine Learning Analysis Using Sentinel-1, XGBoost, and SHAP
+
+[![Google Earth Engine](https://img.shields.io/badge/Google%20Earth%20Engine-Platform-orange?logo=googleearthengine&logoColor=white)](https://earthengine.google.com/)
+[![Google Colab](https://img.shields.io/badge/Google%20Colab-Notebook-F9AB00?logo=googlecolab&logoColor=white)](https://colab.research.google.com/)
+[![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![Sentinel-1](https://img.shields.io/badge/Satellite-Sentinel--1%20SAR-darkblue)](https://www.esa.int/Applications/Observing_the_Earth/Copernicus)
+[![XGBoost](https://img.shields.io/badge/ML-XGBoost-green)](https://xgboost.readthedocs.io/)
+[![SHAP](https://img.shields.io/badge/Explainable%20AI-SHAP-purple)](https://shap.readthedocs.io/)
+[![Rasterio](https://img.shields.io/badge/Geospatial-Rasterio-blue)](https://rasterio.readthedocs.io/)
+[![GeoPandas](https://img.shields.io/badge/Geospatial-GeoPandas-139C5A)](https://geopandas.org/)
+[![NumPy](https://img.shields.io/badge/NumPy-Scientific%20Computing-013243?logo=numpy)](https://numpy.org/)
+[![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458?logo=pandas)](https://pandas.pydata.org/)
+[![Matplotlib](https://img.shields.io/badge/Visualization-Matplotlib-11557C)](https://matplotlib.org/)
+[![Scikit--learn](https://img.shields.io/badge/ML-Scikit--learn-F7931E?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
+[![Earth Engine Python API](https://img.shields.io/badge/API-Earth%20Engine%20Python%20API-orange)](https://developers.google.com/earth-engine/guides/python_install)
+
 https://doi.org/10.5281/zenodo.24167626
 
 FloodSense-AI is a geospatial and machine learning project developed to identify potential flood-affected areas using Sentinel-1 Synthetic Aperture Radar (SAR) imagery, terrain information, vegetation indicators, and an XGBoost classification model.
